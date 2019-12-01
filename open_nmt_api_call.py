@@ -20,8 +20,9 @@ f.close()
 subprocess.call(["onmt_translate ", "-model " , "open_nmt_default_model_step_100000.pt " , "-src " , "input.txt " , "-output " , "output.txt ", "-replace_unk ", "-verbose " ])
 
 of = open(output_file, 'r+')
-spanish_sentence = f.read()
+spanish_sentence = of.read()
 print('Translated Sentence: ', spanish_sentence)
+of.close()
 
 if os.path.exists(input_file):
 	os.remove(input_file)
