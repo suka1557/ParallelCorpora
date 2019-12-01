@@ -11,7 +11,7 @@ if os.path.exists(input_file):
 if os.path.exists(output_file):
 	os.remove(output_file)
 	
-english_sentence = Input('Enter text: ')
+english_sentence = input('Enter text: ')
 
 f = open(input_file, 'w+')
 f.write(english_sentence)
