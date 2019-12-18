@@ -19,7 +19,7 @@ f.close()
 
 #subprocess.call(["onmt_translate", "-model" , "model_step_100000.pt" , "-src" , "input.txt" , "-output" , "output.txt", "-replace_unk", "-verbose" ], shell = True)
 
-subprocess.call("onmt_translate"+" -model model_step_100000.pt -src input.txt -output output.txt -replace_unk -verbose", shell=True)
+subprocess.call("onmt_translate"+" -model model_step_50000.pt -src input.txt -output output.txt -replace_unk -verbose", shell=True)
 
 of = open(output_file, 'r+')
 spanish_sentence = of.read()
