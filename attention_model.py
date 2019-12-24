@@ -163,7 +163,7 @@ def define_nmt(hidden_size, batch_size, en_timesteps, en_vsize, sp_timesteps, sp
     return full_model, encoder_model, decoder_model
 #
 #
-batch_size = 256
+batch_size = 128
 
 hidden_size = 96
 
