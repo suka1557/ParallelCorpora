@@ -16,8 +16,8 @@ from tensorflow.python.keras.losses import sparse_categorical_crossentropy
 import pickle
 
 #reading data
-eng = pd.read_csv('eng_tr_small.txt', sep='\n', header = ['English'])
-sp = pd.read_csv('spa_tr_small.txt', sep='\n', header = ['Spanish'])
+eng = pd.read_csv('eng_tr_small.txt', sep='\n', names = ['English'])
+sp = pd.read_csv('spa_tr_small.txt', sep='\n', names = ['Spanish'])
 
 #Preprocessing
 #spa.columns=['Content']
