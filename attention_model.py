@@ -162,7 +162,7 @@ def define_nmt(hidden_size, batch_size, en_timesteps, en_vsize, sp_timesteps, sp
     return full_model, encoder_model, decoder_model
 #
 #
-batch_size = 128
+batch_size = 256
 
 hidden_size = 96
 
@@ -195,22 +195,24 @@ def train(full_model, en_seq, sp_seq, batch_size, n_epochs=1):
 
         for bi in range(0, en_seq.shape[0] - batch_size, batch_size):
 		
-			try:
-			    en_onehot_seq = to_categorical(en_seq[bi:bi + batch_size, :], num_classes=en_vsize)
-				sp_onehot_seq = to_categorical(sp_seq[bi:bi + batch_size, :], num_classes=sp_vsize)
+			#try:
+			en_onehot_seq = to_categorical(en_seq[bi:bi + batch_size, :], num_classes=en_vsize)
+			sp_onehot_seq = to_categorical(sp_seq[bi:bi + batch_size, :], num_classes=sp_vsize)
 
-				full_model.train_on_batch([en_onehot_seq, sp_onehot_seq[:, :-1, :]], sp_onehot_seq[:, 1:, :])
+			full_model.train_on_batch([en_onehot_seq, sp_onehot_seq[:, :-1, :]], sp_onehot_seq[:, 1:, :])
+			#full_model.fit([en_onehot_seq, sp_onehot_seq[:, :-1, :]], sp_onehot_seq[:, 1:, :], epochs = 1, batch_size  = batch_size)
 
-				l = full_model.evaluate([en_onehot_seq, sp_onehot_seq[:, :-1, :]], sp_onehot_seq[:, 1:, :],
-										batch_size=batch_size)
-				losses.append(l)
-				
-				#Saving Weights
-				if bi%10 == 0:
-					infer_dec_model.save_weights('decoder_weights_n.h5')
-					infer_enc_model.save_weights('encoder_weights_n.h5')
-			except:
-				continue
+			l, acc = full_model.evaluate([en_onehot_seq, sp_onehot_seq[:, :-1, :]], sp_onehot_seq[:, 1:, :],
+									batch_size=batch_size, verbose = 1)
+			print('Epoch = ', ep , 'Iteration = ' , int(bi/batch_size)+1 , 'Accuracy = ', acc)
+			losses.append(l)
+			
+			#Saving Weights
+			if bi%10 == 0:
+				infer_dec_model.save_weights('decoder_weights_n.h5')
+				infer_enc_model.save_weights('encoder_weights_n.h5')
+			#except:
+			#	continue
 
         if (ep + 1) % 1 == 0:
             print("Loss in epoch {}: {}".format(ep + 1, np.mean(losses)))
