@@ -194,6 +194,7 @@ def train(full_model, en_seq, sp_seq, batch_size, n_epochs=1):
         losses = []
 
         for bi in range(0, en_seq.shape[0] - batch_size, batch_size):
+		
 			try:
 			    en_onehot_seq = to_categorical(en_seq[bi:bi + batch_size, :], num_classes=en_vsize)
 				sp_onehot_seq = to_categorical(sp_seq[bi:bi + batch_size, :], num_classes=sp_vsize)
