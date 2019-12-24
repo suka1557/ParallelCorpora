@@ -19,6 +19,10 @@ import pickle
 eng = pd.read_csv('eng_tr_small.txt', sep='\n', names = ['English'])
 sp = pd.read_csv('spa_tr_small.txt', sep='\n', names = ['Spanish'])
 
+#Converting to strings
+eng['English'] = eng['English'].astype(str)
+sp['Spanish'] = sp['Spanish'].astype(str)
+
 #Preprocessing
 #spa.columns=['Content']
 #text = spa['Content'].apply(lambda x: x[: x.find('CC-BY 2.0')])
@@ -37,6 +41,7 @@ spa['Spanish'] = spa['Spanish'].apply(lambda x: re.sub('[<>;+:!¡/\|?¿,.0-9@#$%
 spa['English'] = spa['English'].apply(lambda x: re.sub('[-]+' , ' ' , x))
 spa['Spanish'] = spa['Spanish'].apply(lambda x: re.sub('[-]+' , ' ' , x))
 #del(text)
+del(eng, sp)
 
 #Shuffling dataset
 spa = spa.sample(frac = 1)
