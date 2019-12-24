@@ -294,7 +294,7 @@ sp_tokenizer.fit_on_texts(tr_sp_text)
 en_seq, sp_seq = preprocess_data(en_tokenizer, sp_tokenizer, tr_en_text, tr_sp_text, en_timesteps, sp_timesteps)
 
 en_vsize = max(en_tokenizer.index_word.keys()) + 1
-sp_vsize = 30000#max(en_tokenizer.index_word.keys()) + 1
+sp_vsize = 35000#max(en_tokenizer.index_word.keys()) + 1
 
 """ Defining the full model """
 
